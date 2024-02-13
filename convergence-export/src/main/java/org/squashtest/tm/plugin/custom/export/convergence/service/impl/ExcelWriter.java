@@ -24,6 +24,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -270,7 +272,18 @@ public class ExcelWriter {
 		}
 
 		writeErrorSheet(workbook);
+		//TODO non testé !!!
+		copierLignesExcel(workbook);
 
+				//workbook.;//copyRows(0,1,1,new CellCopyPolicy());//copyRows(0,8,);
+		/*
+		 * import org.apache.poi.ss.usermodel.*;
+			import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+			import java.io.File;
+			import java.io.FileInputStream;
+			import java.io.FileOutputStream;
+			import java.io.IOException;*/
 		LOGGER.info("  fin remplissage du woorkbook: " + workbook);
 
 		if (!data.getPerimeter().isPrePublication()) {
@@ -278,6 +291,52 @@ public class ExcelWriter {
 		}
 	}
 
+	public void copierLignesExcel(XSSFWorkbook workbook) {
+       
+
+           
+
+		// Obtient une référence vers les onglets source et destination
+		XSSFSheet sourceSheet = workbook.getSheet("Exigences");
+		XSSFSheet destinationSheet = workbook.getSheet("ExigencesTriees");
+
+		String chapitre = sourceSheet.getRow(1).getCell(3).getStringCellValue();
+		if (chapitre.equals("test1")) {
+		// Copie les lignes de l'onglet source vers l'onglet destination
+		copierLignes(sourceSheet, destinationSheet, 1, 2); // Remplacez 2 et 5 par les indices de ligne à copier
+		}
+		// Sauvegarde les modifications dans le fichier Excel
+	 //   FileOutputStream fileOutputStream = new FileOutputStream(new File("chemin/vers/votre/fichier_modifie.xlsx"));
+	//    workbook.write(fileOutputStream);
+	  //  fileOutputStream.close();
+
+		// Ferme le workbook et le fichier d'entrée
+   //     workbook.close();
+	   // fileInputStream.close();
+
+		System.out.println("Copie des lignes réussie.");
+  
+}
+
+public void copierLignes(XSSFSheet sourceSheet, XSSFSheet destinationSheet, int startRow, int endRow) {
+	for (int i = startRow; i <= endRow; i++) {
+		// Obtient la ligne source et la ligne destination correspondante (crée une nouvelle ligne si nécessaire)
+		XSSFRow sourceRow = sourceSheet.getRow(i);
+		XSSFRow destinationRow = destinationSheet.getRow(i - startRow);
+		if (destinationRow == null) {
+			destinationRow = destinationSheet.createRow(i - startRow);
+		}
+
+		// Copie les cellules de la ligne source vers la ligne destination
+		for (int j = 0; j < sourceRow.getPhysicalNumberOfCells(); j++) {
+			XSSFCell sourceCell = sourceRow.getCell(j);
+			XSSFCell destinationCell = destinationRow.createCell(j);
+			if (sourceCell != null) {
+				destinationCell.setCellValue(sourceCell.getStringCellValue()); // Adapté à votre type de données
+			}
+		}
+	}
+}
 	/**
 	 * Flush to temporary file.
 	 *

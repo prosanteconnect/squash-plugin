@@ -17,6 +17,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.common.usermodel.Hyperlink;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellCopyPolicy;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
@@ -390,7 +391,69 @@ public class ExcelWriter {
 		}
 
 		writeErrorSheet(workbook);
+		workbook.createSheet("tri");
+		//workbook.;//copyRows(0,1,1,new CellCopyPolicy());//copyRows(0,8,);
+		/*
+		 * import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class CopierLignesExcel {
+
+    public static void main(String[] args) {
+        try {
+            // Charge le fichier Excel existant
+            FileInputStream fileInputStream = new FileInputStream(new File("chemin/vers/votre/fichier.xlsx"));
+            XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
+
+            // Obtient une référence vers les onglets source et destination
+            XSSFSheet sourceSheet = workbook.getSheet("OngletSource");
+            XSSFSheet destinationSheet = workbook.getSheet("OngletDestination");
+
+            // Copie les lignes de l'onglet source vers l'onglet destination
+            copierLignes(sourceSheet, destinationSheet, 2, 5); // Remplacez 2 et 5 par les indices de ligne à copier
+
+            // Sauvegarde les modifications dans le fichier Excel
+            FileOutputStream fileOutputStream = new FileOutputStream(new File("chemin/vers/votre/fichier_modifie.xlsx"));
+            workbook.write(fileOutputStream);
+            fileOutputStream.close();
+
+            // Ferme le workbook et le fichier d'entrée
+            workbook.close();
+            fileInputStream.close();
+
+            System.out.println("Copie des lignes réussie.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void copierLignes(XSSFSheet sourceSheet, XSSFSheet destinationSheet, int startRow, int endRow) {
+        for (int i = startRow; i <= endRow; i++) {
+            // Obtient la ligne source et la ligne destination correspondante (crée une nouvelle ligne si nécessaire)
+            XSSFRow sourceRow = sourceSheet.getRow(i);
+            XSSFRow destinationRow = destinationSheet.getRow(i - startRow);
+            if (destinationRow == null) {
+                destinationRow = destinationSheet.createRow(i - startRow);
+            }
+
+            // Copie les cellules de la ligne source vers la ligne destination
+            for (int j = 0; j < sourceRow.getPhysicalNumberOfCells(); j++) {
+                XSSFCell sourceCell = sourceRow.getCell(j);
+                XSSFCell destinationCell = destinationRow.createCell(j);
+                if (sourceCell != null) {
+                    destinationCell.setCellValue(sourceCell.getStringCellValue()); // Adapté à votre type de données
+                }
+            }
+        }
+    }
+}
+
+		 */
 		LOGGER.info("  fin remplissage du woorkbook: " + workbook);
 
 		if (!data.getPerimeter().isPrePublication()) {
