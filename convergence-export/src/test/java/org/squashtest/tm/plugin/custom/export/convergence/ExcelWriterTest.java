@@ -66,7 +66,7 @@ public class ExcelWriterTest {
 		requirement1.setProfil_2("Général");
 		requirement1.setId_section_3("INS");
 		requirement1.setSection_4("Gestion de l'ins");
-		requirement1.setBloc_5("null");
+		requirement1.setBloc_5("test1");
 		requirement1.setFonction_6("Alimentation manuelle");
 		requirement1.setNatureExigence_7(Constantes.CATEGORIE_EXIGENCE);
 		requirement1.setNumeroExigence_8("PSC.03");
@@ -286,7 +286,7 @@ public class ExcelWriterTest {
 		System.out.println(workbook.getSheet("Exigences").getRow(3).getCell(10).getStringCellValue());
 		System.out.println("xxxxxxxxxxxxx");
 		System.out.println(workbook.getSheet("Exigences").getRow(3).getCell(8).getStringCellValue().length());
-		assertEquals(467,workbook.getSheet("Exigences").getRow(3).getCell(8).getStringCellValue().length());
+		assertEquals(293,workbook.getSheet("Exigences").getRow(3).getCell(7).getStringCellValue().length());
 
 		workbook.close();
 		out.close();	

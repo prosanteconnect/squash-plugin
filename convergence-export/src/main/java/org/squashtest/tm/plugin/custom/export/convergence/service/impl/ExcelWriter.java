@@ -26,12 +26,14 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.squashtest.tm.plugin.custom.export.convergence.Constantes;
 import org.squashtest.tm.plugin.custom.export.convergence.Level;
 import org.squashtest.tm.plugin.custom.export.convergence.Parser;
+import org.squashtest.tm.plugin.custom.export.convergence.SortedChapter;
 import org.squashtest.tm.plugin.custom.export.convergence.Traceur;
 import org.squashtest.tm.plugin.custom.export.convergence.model.ExcelRow;
 import org.squashtest.tm.plugin.custom.export.convergence.model.ReqStepBinding;
@@ -274,6 +276,22 @@ public class ExcelWriter {
 		writeErrorSheet(workbook);
 		//TODO non testé !!!
 		copierLignesExcel(workbook);
+		XSSFSheet sheetSorted = workbook.getSheet("ExigencesTriees");
+		for (Row row : sheetSorted) {
+			for (Cell cell : row) {
+				CellStyle style = cell.getCellStyle();
+				style.setBorderBottom(CellStyle.BORDER_THIN);
+				style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+				style.setBorderLeft(CellStyle.BORDER_THIN);
+				style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+				style.setBorderRight(CellStyle.BORDER_THIN);
+				style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+				style.setBorderTop(CellStyle.BORDER_THIN);
+				style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+				cell.setCellStyle(style);
+			}
+		}
+		
 
 				//workbook.;//copyRows(0,1,1,new CellCopyPolicy());//copyRows(0,8,);
 		/*
@@ -294,17 +312,26 @@ public class ExcelWriter {
 	public void copierLignesExcel(XSSFWorkbook workbook) {
        
 
-           
 
 		// Obtient une référence vers les onglets source et destination
 		XSSFSheet sourceSheet = workbook.getSheet("Exigences");
 		XSSFSheet destinationSheet = workbook.getSheet("ExigencesTriees");
-
-		String chapitre = sourceSheet.getRow(1).getCell(3).getStringCellValue();
-		if (chapitre.equals("test1")) {
+//TODO A TESTER
+		for (int j = 0; j < sourceSheet.getLastRowNum(); j++) {
+		String chapitre = sourceSheet.getRow(1).getCell(2).getStringCellValue();
+		
+		
+		System.out.println("===> "+chapitre);
+		if (chapitre.equals(SortedChapter.FIRST.getValue())) {
+				System.out.println("test1");
 		// Copie les lignes de l'onglet source vers l'onglet destination
-		copierLignes(sourceSheet, destinationSheet, 1, 2); // Remplacez 2 et 5 par les indices de ligne à copier
+			copierLignes(sourceSheet, destinationSheet, 1, 1); // Remplacez 2 et 5 par les indices de ligne à copier
+		}else{
+			System.out.println("pas test1");
 		}
+	}
+
+
 		// Sauvegarde les modifications dans le fichier Excel
 	 //   FileOutputStream fileOutputStream = new FileOutputStream(new File("chemin/vers/votre/fichier_modifie.xlsx"));
 	//    workbook.write(fileOutputStream);
@@ -322,11 +349,18 @@ public void copierLignes(XSSFSheet sourceSheet, XSSFSheet destinationSheet, int 
 	for (int i = startRow; i <= endRow; i++) {
 		// Obtient la ligne source et la ligne destination correspondante (crée une nouvelle ligne si nécessaire)
 		XSSFRow sourceRow = sourceSheet.getRow(i);
-		XSSFRow destinationRow = destinationSheet.getRow(i - startRow);
+		Integer lastRow =  destinationSheet.getLastRowNum();
+		System.out.println("===> destination last row " + lastRow);
+		Integer newRow = lastRow + 1;
+		System.out.println("===> destination new row " + newRow);
+		XSSFRow destinationRow = destinationSheet.getRow(newRow);
+		//System.out.println("===> destination row" + destinationRow.getRowNum());
+		//XSSFRow destinationRow = destinationSheet.getLastRowNum();
 		if (destinationRow == null) {
-			destinationRow = destinationSheet.createRow(i - startRow);
+			System.out.println("===> destinationRow is null");
+			destinationRow = destinationSheet.createRow(newRow);
 		}
-
+		System.out.println("===> " + destinationRow.getRowNum());
 		// Copie les cellules de la ligne source vers la ligne destination
 		for (int j = 0; j < sourceRow.getPhysicalNumberOfCells(); j++) {
 			XSSFCell sourceCell = sourceRow.getCell(j);
