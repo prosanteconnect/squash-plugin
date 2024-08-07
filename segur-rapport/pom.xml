@@ -4,16 +4,16 @@
 
   <groupId>org.squashtest.tm.plugin</groupId>
   <artifactId>report.ans.segur</artifactId>
-  <version>1.0.0.RC33</version>
+  <version>2.0.0</version>
   <packaging>jar</packaging>
   <name>segur-rapport-exigences</name>
 
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>17</java.version>
     <!-- ecraser la version junit embarquée dans squash -->
     <junit-jupiter.version>5.7.1</junit-jupiter.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <squash.core.version>3.0.5.RELEASE</squash.core.version>
+    <squash.core.version>7.1.0.RELEASE</squash.core.version>
   </properties>
 
   <dependencyManagement>
@@ -41,13 +41,13 @@
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>
-      <version>3.14</version>
+      <version>5.2.3</version>
       <!--$NO-MVN-MAN-VER$-->
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
-      <version>3.14</version>
+      <version>5.2.3</version>
       <!--$NO-MVN-MAN-VER$-->
       <exclusions>
         <exclusion>

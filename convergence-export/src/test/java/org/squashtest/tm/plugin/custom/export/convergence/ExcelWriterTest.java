@@ -6,22 +6,16 @@ package org.squashtest.tm.plugin.custom.export.convergence;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.squashtest.tm.plugin.custom.export.convergence.Constantes;
-import org.squashtest.tm.plugin.custom.export.convergence.Parser;
-import org.squashtest.tm.plugin.custom.export.convergence.Traceur;
 import org.squashtest.tm.plugin.custom.export.convergence.model.ExcelRow;
 import org.squashtest.tm.plugin.custom.export.convergence.model.PerimeterData;
 import org.squashtest.tm.plugin.custom.export.convergence.model.ReqStepBinding;
