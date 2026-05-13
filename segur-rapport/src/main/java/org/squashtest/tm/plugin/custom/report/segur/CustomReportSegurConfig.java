@@ -6,7 +6,7 @@ package org.squashtest.tm.plugin.custom.report.segur;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;

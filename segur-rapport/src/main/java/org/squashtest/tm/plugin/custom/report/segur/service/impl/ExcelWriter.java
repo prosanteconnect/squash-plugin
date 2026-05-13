@@ -14,9 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.poi.common.usermodel.Hyperlink;
 import org.apache.poi.common.usermodel.HyperlinkType;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -297,7 +295,7 @@ public class ExcelWriter {
 				// liste des steps pour l'exigence ET le cas de test courant
 				if (testCase.getIsCoeurDeMetier()) {
 
-					// TODO onglet coeur de métier => lecture des steps dans le binding
+				// TODO onglet coeur de métier => lecture des steps dans le binding
 //				bindingSteps = liste.stream().filter(p -> p.getResId().equals(req.getResId()))
 //						.map(val -> val.getStepId()).distinct().collect(Collectors.toList());
 					writeCaseTestPartCoeurDeMetier(testCase, null, data.getSteps(), rowWithTC, style2apply);

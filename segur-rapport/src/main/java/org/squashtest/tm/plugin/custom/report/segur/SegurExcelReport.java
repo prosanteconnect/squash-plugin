@@ -6,7 +6,7 @@ package org.squashtest.tm.plugin.custom.report.segur;
 import java.io.File;
 import java.util.Map;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.squashtest.tm.api.report.BasicDirectDownloadableReport;
 import org.squashtest.tm.api.report.criteria.Criteria;

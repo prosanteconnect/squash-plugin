@@ -4,16 +4,16 @@
 
   <groupId>org.squashtest.tm.plugin</groupId>
   <artifactId>report.ans.segur</artifactId>
-  <version>2.0.2</version>
+  <version>2.1.0</version>
   <packaging>jar</packaging>
   <name>segur-rapport-exigences</name>
 
   <properties>
-    <java.version>17</java.version>
+    <java.version>21</java.version>
     <!-- ecraser la version junit embarquée dans squash -->
     <junit-jupiter.version>5.7.1</junit-jupiter.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <squash.core.version>7.1.0.RELEASE</squash.core.version>
+    <squash.core.version>13.0.4.RELEASE</squash.core.version>
   </properties>
 
   <dependencyManagement>
@@ -152,6 +152,16 @@
         <version>3.11.0</version>
         <configuration>
           <release>${java.version}</release>
+          <compilerArgs>
+            <arg>-parameters</arg>
+          </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.42</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
 

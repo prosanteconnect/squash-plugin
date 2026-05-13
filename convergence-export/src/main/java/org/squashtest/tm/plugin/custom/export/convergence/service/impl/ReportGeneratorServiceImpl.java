@@ -9,11 +9,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -21,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.squashtest.tm.api.report.criteria.Criteria;
-import org.squashtest.tm.plugin.custom.export.convergence.CriteriaEntry;
 import org.squashtest.tm.plugin.custom.export.convergence.Traceur;
 import org.squashtest.tm.plugin.custom.export.convergence.model.PerimeterData;
 import org.squashtest.tm.plugin.custom.export.convergence.repository.RequirementsCollector;
